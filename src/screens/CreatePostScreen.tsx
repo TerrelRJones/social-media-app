@@ -12,6 +12,7 @@ import React, { useState } from "react";
 
 import { Entypo } from "@expo/vector-icons";
 import * as ImagePicker from "expo-image-picker";
+import { useNavigation } from "@react-navigation/native";
 
 interface CreatePostScreenProps {}
 
@@ -25,6 +26,8 @@ const user = {
 const CreatePostScreen = () => {
   const [description, setDescription] = useState<string>("");
   const [image, setImage] = useState<string>("");
+
+  const { goBack } = useNavigation();
 
   const onSubmit = () => {
     console.warn(description);
@@ -53,6 +56,9 @@ const CreatePostScreen = () => {
       contentContainerStyle={{ flex: 1 }}
       keyboardVerticalOffset={10}
     >
+      <TouchableOpacity onPress={() => goBack()}>
+        <Text>Go Back</Text>
+      </TouchableOpacity>
       <View style={styles.header}>
         <Image source={{ uri: user.image }} style={styles.profileImage} />
         <Text style={styles.userName}>{user.name}</Text>
